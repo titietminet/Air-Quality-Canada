@@ -3,17 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css" />
     <title>Air quality Canada</title>
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-black">
-    <nav class="h-20 left-0 right-0 top-0 z-10 px-4 m-5 fixed">
-        <div class="flex items-center justify-evenly max-w-xl m-auto px-4 py-3 relative z-20 bg-zinc-100/60 rounded-3xl ">
-            <a href="index.html" class="font-sans">carte</a>
-            <a href="" class="font-sans underline underline-offset-4">recherche</a>
+    <nav>
+        <div>
+            <a href="index.html">carte</a>
+            <a id="page" href="">recherche</a>
         </div>
     </nav>
-    <main class="flex flex-column items-center justify-center mt-28">
+    <main id="mainRecherche">
+        <div class="search">
+            <img class="imgLoupe" src="img/loupe.svg" alt="loupe">
+            <div class="search-bar">
+                <input id="input-search" type="text" placeholder="Rechercher..." />
+                <div id="box-search">
+                    <div id="sep-search"></div>
+                </div>
+            </div>
+        </div>
     </main>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-export class Like {
+export class Station {
 
     /**
      * nom de la station
@@ -8,35 +8,20 @@ export class Like {
 
     /**
      * id de la station
-     * @type {string}
+     * @type {int}
      */
     _id;
 
     /**
-     * quantité d'enneigement
-     * @type {number}
-     */
-    _enneigement;
-
-    /**
      * quantité de denneigement
-     * @type {number}
+     * @type {float}
      */
-    _denneigement;
+    _airQuality;
 
-    /**
-     * praticabilité autour de la station
-     * @type {boolean}
-     */
-    _praticable;
-
-    constructor(name, enneigement, denneigement){
+    constructor(id, name, airQuality){
+        this._id = id;
         this._name = name;
-        this._enneigement = enneigement;
-        this._denneigement = denneigement;
-        if(this._enneigement < this._denneigement){
-            this._praticable = true;
-        }
+        this._airQuality = airQuality;
     }
 
     /**
@@ -46,62 +31,22 @@ export class Like {
         return this._name;
     }
 
-    /**
-     * @returns {number}
-     */
-    get enneigement(){
-        return this._enneigement;
-    }  
 
     /**
-     * @returns {number}
-     */
-    get denneigement(){
-        return this._denneigement;
-    }
-
-    /**
-     * @returns {boolean}
-     */
-    get praticable(){
-        return this._praticable;
-    }
-
-    /**
-     * @returns {string}
+     * @returns {int}
      */
     get id(){
         return this._id;
     }
 
     /**
-     * @param {number} enneigement
+     * @param {float} airQuality
      */
-    set enneigement(enneigement){
-        this._enneigement = enneigement;
-        if(this._enneigement < this._denneigement){
-            praticable(true);
-        } else {
-            praticable(false);
-        }   
+    set airQuality(airQuality){
+        this._airQuality = airQuality;
     }
 
-    /**
-     * @param {number} denneigement
-     */
-    set denneigement(denneigement){
-        this._denneigement = denneigement;
-        if(this._enneigement < this._denneigement){
-            praticable(true);
-        } else {
-            praticable(false);
-        }
-    }
-
-    /**
-     * @param {boolean} praticable
-     */
-    set praticable(praticable){
-        this._praticable = praticable;
+    getHtmlRehcerche(){
+        return '<a class="station" id="'+this._id+'">'+this._name+'<span>'+this._airQuality+'</span></div>';
     }
 }
