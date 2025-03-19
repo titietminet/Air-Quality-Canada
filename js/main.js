@@ -31,7 +31,7 @@ view.inputSearch.addEventListener("input", (e) => {
                             console.log("Fetching URL:", url); // Debugging log
                             let proxyUrl = "https://api.allorigins.win/raw?url="; // Alternative public CORS proxy
                             let proxiedUrl = proxyUrl + encodeURIComponent(url); // Combine proxy and target URL
-                                fetch(proxiedUrl)
+                                fetch(url)
                                     .then((response) => {
                                         if (!response.ok) {
                                             throw new Error(`HTTP error! status: ${response.status}`);
@@ -46,14 +46,12 @@ view.inputSearch.addEventListener("input", (e) => {
                                             console.log("Air quality:", airQualityHealthIndex.textContent);
                                             const station = new Station(feature.id,feature.properties.location_name_en, airQualityHealthIndex.textContent);
                                             city.add(station);
-                                            console.log("City:", city);
 
                                             // Clear previous results in boxSearch
                                             view.boxSearch.innerHTML = "";
 
                                             // Display stations in boxSearch
                                             city.forEach((station) => {
-                                                console.log("Station:", station.getHtmlRehcerche());
                                                 view.boxSearch.innerHTML += (station.getHtmlRehcerche());
                                             });
                                         } else {
@@ -67,7 +65,6 @@ view.inputSearch.addEventListener("input", (e) => {
             first = false;
         } else {
             let search = e.target.value.toLowerCase();
-            console.log("search:", search);
             let searchCity = new Set();
             city.forEach((station) => {
                 if (station.name.toLowerCase().includes(search)) {
@@ -77,7 +74,6 @@ view.inputSearch.addEventListener("input", (e) => {
             console.log("searchCity:", searchCity);
             view.boxSearch.innerHTML = "";
             searchCity.forEach((station) => {
-                console.log("Station:", station.getHtmlRehcerche());
                 view.boxSearch.innerHTML += (station.getHtmlRehcerche());
             });
         }
