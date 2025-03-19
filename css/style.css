@@ -1,0 +1,125 @@
+/** Style global */
+body {
+font-family: "Avenir", sans-serif;
+  min-width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+}
+
+a {
+text-decoration: none;
+}
+
+@font-face {
+font-family: "Avenir";
+  src: url(AvenirLTStd-Medium.otf);
+}
+
+/** Style header */
+header {
+top: 0;
+  right: 0;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr auto 1fr;
+  width: 100%;
+  height: 64px;
+  padding: 0 1.5rem;
+  background-color: #0C121E;
+}
+
+header a {
+padding: 0 2rem;
+  color: #f3f3f4;
+  transition: all 0.3s;
+}
+
+header a:hover {
+color: rgb(141, 232, 254);
+}
+
+.borderline-header {
+position: absolute;
+  top: 55px;
+  left: 0;
+  width: 100px;
+  height: 2px;
+  opacity: 0;
+  background: #8de8fe;
+  transition: transform ease .2s, opacity ease .2s, width ease .2s;
+  z-index: 1;
+  pointer-events: none;
+}
+
+header ul {
+position: static;
+  left: 0;
+  bottom: auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  width: 100%;
+  height: 4em;
+  margin: 0;
+  padding: 0;
+  background-color: #0c131f;
+  list-style-type: none;
+}
+
+header li {
+display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#svgeat {
+width: auto;
+  height: 55px;
+  margin: 0;
+  padding: 0;
+  color: #8de8fe;
+}
+
+.filter-svg {
+filter: invert(80%) sepia(13%) saturate(1156%) hue-rotate(157deg) brightness(104%) contrast(99%);
+}
+
+.filter-svg-white {
+filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(28deg) brightness(108%) contrast(101%);
+}
+
+.here {
+text-decoration: underline;
+  color: #8de8fe;
+  text-decoration-color: #8de8fe;
+  text-underline-offset: 18px;
+}
+
+/** Style main */
+
+.section-home {
+display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100vw;
+  height: 80vh;
+  background-color: #0C121E;
+}
+
+.section-home h1 {
+font-size: 2.2rem;
+  color: #f3f3f4;
+}
+
+.section-home p {
+font-size: 1.5rem;
+  color: #f3f3f4;
+}
+
+.section-home img {
+width: 40%;
+  border-radius: 24px;
+}
+
+.section-home div {
+width: 40%;
+}

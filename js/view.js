@@ -1,10 +1,6 @@
 export const view = {
     
-    mainRecherche: document.getElementById('mainRecherche'),
+    borderlineHeader: document.getElementById("borderline-header"),
 
-    boxSearch: document.getElementById('box-search'),
-
-    inputSearch: document.getElementById('input-search'),
-
-    sepSearch: document.getElementById('sep-search'),
+    headerLink: document.getElementsByClassName("header-link"),
 }
