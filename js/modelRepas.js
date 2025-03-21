@@ -67,7 +67,7 @@ export class modelRepas {
     isPresenceAlcool() {
         presenceAlcool = false;
         for (const plat of this.plats) {
-            if (plat.presenceAlcool) {
+            if (plat.presenceAlcool == "OUI") {
                 presenceAlcool = true;
             }
         }
@@ -75,10 +75,10 @@ export class modelRepas {
     }
 
     isVegetarien() {
-        vegetarien = false;
+        vegetarien = true;
         for (const plat of this.plats) {
-            if (plat.vegetarien) {
-                vegetarien = true;
+            if (plat.vegetarien == "NON") {
+                vegetarien = false;
             }
         }
         return vegetarien;
@@ -87,7 +87,7 @@ export class modelRepas {
     isVegan() {
         vegan = false;
         for (const plat of this.plats) {
-            if (plat.vegan) {
+            if (plat.vegan == "OUI") {
                 vegan = true;
             }
         }
@@ -95,20 +95,20 @@ export class modelRepas {
     }
 
     isBio() {
-        bio = false;
+        bio = true;
         for (const plat of this.plats) {
-            if (plat.bio) {
-                bio = true;
+            if (plat.bio == "NON") {
+                bio = false;
             }
         }
         return bio;
     }
 
     isSansGluten() {
-        sansGluten = false;
+        sansGluten = true;
         for (const plat of this.plats) {
-            if (plat.sansGluten) {
-                sansGluten = true;
+            if (plat.sansGluten == "NON") {
+                sansGluten = false;
             }
         }
         return sansGluten;
@@ -124,4 +124,15 @@ export class modelRepas {
         return presencePorc;
     }
     
+    getAllergenes() {
+        allergenes = [];
+        for (const plat of this.plats) {
+            for (const allergene of plat.allergenes) {
+                if (!allergenes.includes(allergene)) {
+                    allergenes.push(allergene);
+                }
+            }
+        }
+        return allergenes;
+    }
 }
