@@ -6,10 +6,12 @@ export class modelRepas {
 
     addPlat(plat) {
         this.plats.push(plat);
+        this.saveToLocalStorage();
     }
 
     removePlat(plat) {
         this.plats = this.plats.filter(p => p !== plat);
+        this.saveToLocalStorage();
     }
 
     get plats() {
@@ -134,5 +136,20 @@ export class modelRepas {
             }
         }
         return allergenes;
+    }
+
+    saveToLocalStorage() {
+        const repas = JSON.stringify(this);
+        localStorage.setItem('repas_${this.nom}', repas);
+    }
+
+    static loadFromLocalStorage(nom) {
+        const repasInfos = localStorage.getItem('repas_${nom}');
+        if (!repas) return null;
+
+        const infos = JSON.parse(repasInfos);
+        const repas = new modelRepas(infos.nom);
+        repas.plats = infos.plats;
+        return repas;
     }
 }
