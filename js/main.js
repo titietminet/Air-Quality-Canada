@@ -5,10 +5,16 @@ console.log("main.js");
 
 const listLocaleStorage = localStorage.getItem("like");
 
-fetch('https://data.sncf.com/api/explore/v2.1/catalog/datasets/menus-des-bars-tgv/records?limit=20',{
+const plats = [];
+
+fetch('https://data.sncf.com/api/explore/v2.1/catalog/datasets/menus-des-bars-tgv/records?limit=100',{
     method: 'GET',
 }).then(response => response.json())
-.then(data => {console.log(data)
+.then(data => {
+    data.results.forEach(element => {
+        plats.push(new Plat(element.date_debut, element.date_fin, element.produit, element.prix, element.type, element.categorie, element.presence_porc, element.presence_alcool, element.composants, element.allergenes, element.allergenes_croises, element.kcal, element.vegetarien, element.vegan, element.bio, element.sans_gluten, element.poids, element.proteines, element.glucides, element.lipides));
+    });
+    console.log(plats);
 })
 
 for (const el of view.headerLink) {
@@ -25,3 +31,31 @@ for (const el of view.headerLink) {
         borderLineHeader.style.opacity = `0`;
     });
 }
+
+view.searchInput.addEventListener("input", function() {
+    console.log(view.searchInput.value);
+    if (view.searchInput.value !== "") {
+        view.searchBox.style.opacity = `1`;
+        view.searchBox.style.top = `${view.searchBar.getBoundingClientRect().top + window.scrollY + view.searchBar.getBoundingClientRect().height}px`;
+        view.searchBox.style.width = `${view.searchBar.getBoundingClientRect().width}px`;
+        view.searchBox.style.left = `${view.searchBar.getBoundingClientRect().left}px`;
+        view.searchBox.style.zIndex = `1`;
+        view.searchBar.style.borderBottomLeftRadius = `0`;
+        view.searchBar.style.borderBottomRightRadius = `0`;
+        let i = 0;
+        let platsSearch = [];
+        while (i < 7 && i < plats.length) {
+            if (plats[i].produit.toLowerCase().includes(view.searchInput.value.toLowerCase())) {
+                platsSearch.push(plats[i]);
+            }
+            i++;
+        }
+        console.log(platsSearch);
+
+    } else {
+        view.searchBox.style.opacity = `0`;
+        view.searchBox.style.zIndex = `-1`;
+        view.searchBar.style.borderBottomLeftRadius = `32px`;
+        view.searchBar.style.borderBottomRightRadius = `32px`;
+    }
+});

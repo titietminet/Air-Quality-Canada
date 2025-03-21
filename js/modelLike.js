@@ -1,4 +1,5 @@
 export class Plat {
+    #id;
     #dateDebut;
     #dateFin;
     #produit;
@@ -20,7 +21,8 @@ export class Plat {
     #glucides;
     #lipides;
 
-    constructor(dateDebut, dateFin, produit, prix, type, categorie, presencePorc, presenceAlcool, composants, allergenes, allergenesCroises, kcal, vegetarien, vegan, bio, sansGluten, poids, proteines, glucides, lipides) {
+    constructor(id, dateDebut, dateFin, produit, prix, type, categorie, presencePorc, presenceAlcool, composants, allergenes, allergenesCroises, kcal, vegetarien, vegan, bio, sansGluten, poids, proteines, glucides, lipides) {
+        this.#id = id;
         this.#dateDebut = dateDebut;
         this.#dateFin = dateFin;
         this.#produit = produit;
@@ -41,7 +43,10 @@ export class Plat {
         this.#proteines = proteines;
         this.#glucides = glucides;
         this.#lipides = lipides;
-    }   
+    }
+
+    get id() { return this.#id; }
+    set id(value) { this.#id = value; }
 
     get dateDebut() { return this.#dateDebut; }
     set dateDebut(value) { this.#dateDebut = value; }
@@ -102,8 +107,4 @@ export class Plat {
 
     get lipides() { return this.#lipides; }
     set lipides(value) { this.#lipides = value; }
-
-    getHtmlRecherche() {
-        return '<div class="search-plat">'
-    }
 }

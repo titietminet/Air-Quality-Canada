@@ -2,7 +2,7 @@
 body {
 font-family: "Avenir", sans-serif;
   min-width: 100vw;
-  min-height: 100vh;
+  min-height: 200vh;
   margin: 0;
 }
 
@@ -24,7 +24,6 @@ top: 0;
   grid-template-columns: 1fr auto 1fr;
   width: 100%;
   height: 64px;
-  padding: 0 1.5rem;
   background-color: #0C121E;
 }
 
@@ -98,6 +97,7 @@ text-decoration: underline;
 
 .section-home {
 display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   width: 100vw;
@@ -115,11 +115,61 @@ font-size: 1.5rem;
   color: #f3f3f4;
 }
 
-.section-home img {
+.img-wagon-bar {
 width: 40%;
+  height: auto;
   border-radius: 24px;
 }
 
-.section-home div {
+.text-wagon-bar {
 width: 40%;
+}
+
+.section-home-content {
+display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.search-bar {
+display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  width: 70%;
+  height: 2.5rem;
+  padding: 0.5rem;
+  background-color: #f3f3f4;
+  border-radius: 32px;
+  transition: all 0.3s;
+}
+
+.img-loupe {
+width: auto;
+  height: 90%;
+  margin-right: 0.4rem;
+}
+
+.input-search {
+flex-grow: 1;
+  height: 100%;
+  margin: 0 1rem;
+  background-color: #f3f3f4;
+  border: none;
+}
+
+.input-search:focus {
+outline:  none;
+}
+
+.search-box {
+position: absolute;
+  width: 100%;
+  height: 20em;
+  opacity: 0;
+  background-color: #f3f3f4;
+  border-radius: 0 0 32px 32px;
+  transition: all 0.3s;
 }
