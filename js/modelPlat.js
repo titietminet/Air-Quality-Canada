@@ -104,6 +104,38 @@ export class Plat {
     set lipides(value) { this.#lipides = value; }
 
     getHtmlRecherche() {
-        return '<div class="search-plat">'
+        let html = "";
+        if (this.vegetarien === "OUI"){
+            html += '<img class="img-food-search" src="img/food-no-meat-svgrepo-com.svg" alt="no-meat"/>';
+        }
+        if (this.vegan === "OUI"){
+            html += '<img class="img-food-search" src="img/vegan-svgrepo-com.svg" alt="vegan"/>';
+        }
+        if (this.presencePorc === "OUI"){
+            html += '<img class="img-food-search" src="img/pig-illustration-svgrepo-com.svg" alt="porc"/>';
+        }
+        return '<div class="search-plat"> <p>' + this.#produit + '</p> <div class="search-left-plat">'+html+'<p>' + this.#prix + '€</p> <button id="btn-'+this.produit+' class="search-btn"><img src="img/add-favorite-marked-svgrepo-com.svg"/></button></div> </div>';
+    }
+
+    engeristrerLocal() {
+        let listLocaleStorage = localStorage.getItem("plat");
+        if (listLocaleStorage === null) {
+            listLocaleStorage = [];
+        } else {
+            listLocaleStorage = JSON.parse(listLocaleStorage);
+        }
+        listLocaleStorage.push(this.#produit);
+        localStorage.setItem("plat", JSON.stringify(listLocaleStorage));
+    }
+
+    supprimerLocal() {
+        let listLocaleStorage = localStorage.getItem("plat");
+        if (listLocaleStorage === null) {
+            listLocaleStorage = [];
+        } else {
+            listLocaleStorage = JSON.parse(listLocaleStorage);
+        }
+        listLocaleStorage = listLocaleStorage.filter(plat => plat !== this.#produit);
+        localStorage.setItem("plat", JSON.stringify(listLocaleStorage));
     }
 }

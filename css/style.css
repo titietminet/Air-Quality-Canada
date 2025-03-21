@@ -110,7 +110,7 @@ font-size: 2.2rem;
   color: #f3f3f4;
 }
 
-.section-home p {
+.section-home div.text-wagon-bar p {
 font-size: 1.5rem;
   color: #f3f3f4;
 }
@@ -166,10 +166,56 @@ outline:  none;
 
 .search-box {
 position: absolute;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 20em;
+  height: 21em;
   opacity: 0;
+  color: #0C121E;
   background-color: #f3f3f4;
   border-radius: 0 0 32px 32px;
   transition: all 0.3s;
+}
+
+.search-plat {
+display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.search-left-plat {
+display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-btn {
+display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.search-btn:hover {
+background-color: #8de8fe;
+}
+
+.search-btn:active {
+box-shadow: #0C121E 0 0 0 0.1rem;
+}
+
+.search-btn img {
+width: 1.5rem;
+  height: 1.5rem;
+}
+.img-food-search {
+width: 2rem;
+  height: 2rem;
 }
