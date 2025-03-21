@@ -138,18 +138,30 @@ export class modelRepas {
         return allergenes;
     }
 
-    saveToLocalStorage() {
-        const repas = JSON.stringify(this);
-        localStorage.setItem('repas_${this.nom}', repas);
+    static getAllRepas() {
+        const repasData = localStorage.getItem('repasCollection');
+        return repasData ? JSON.parse(repasData) : {};
+    }
+
+    static saveToLocalStorage() {
+        const repas = modelRepas.getAllRepas();
+        repas[this.nom] = this;
+        localStorage.setItem('repasCollection', JSON.stringify(repas));
     }
 
     static loadFromLocalStorage(nom) {
-        const repasInfos = localStorage.getItem('repas_${nom}');
-        if (!repas) return null;
+        const repasCollection = modelRepas.getAllRepas();
+        if (!repasCollection[nom]) return null;
 
-        const infos = JSON.parse(repasInfos);
-        const repas = new modelRepas(infos.nom);
-        repas.plats = infos.plats;
+        const obj = repasCollection[nom];
+        const repas = new modelRepas(obj.nom);
+        repas.plats = obj.plats;
         return repas;
+    }
+
+    static removeRepas(nom) {
+        const repasCollection = modelRepas.getAllRepas();
+        delete repasCollection[nom];
+        localStorage.setItem('repasCollection', JSON.stringify(repasCollection));
     }
 }
