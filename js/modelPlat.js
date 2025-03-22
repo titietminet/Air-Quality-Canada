@@ -103,20 +103,6 @@ export class Plat {
     get lipides() { return this.#lipides; }
     set lipides(value) { this.#lipides = value; }
 
-    getHtmlRecherche() {
-        let html = "";
-        if (this.vegetarien === "OUI"){
-            html += '<img class="img-food-search" src="img/food-no-meat-svgrepo-com.svg" alt="no-meat"/>';
-        }
-        if (this.vegan === "OUI"){
-            html += '<img class="img-food-search" src="img/vegan-svgrepo-com.svg" alt="vegan"/>';
-        }
-        if (this.presencePorc === "OUI"){
-            html += '<img class="img-food-search" src="img/pig-illustration-svgrepo-com.svg" alt="porc"/>';
-        }
-        return '<div class="search-plat"> <p>' + this.#produit + '</p> <div class="search-left-plat">'+html+'<p>' + this.#prix + '€</p> <button id="btn-'+this.produit+' class="search-btn"><img src="img/add-favorite-marked-svgrepo-com.svg"/></button></div> </div>';
-    }
-
     engeristrerLocal() {
         let listLocaleStorage = localStorage.getItem("plat");
         if (listLocaleStorage === null) {
@@ -124,18 +110,47 @@ export class Plat {
         } else {
             listLocaleStorage = JSON.parse(listLocaleStorage);
         }
-        listLocaleStorage.push(this.#produit);
+        if (listLocaleStorage.find(plat => plat.produit === this.#produit) !== undefined) {
+            return;
+        }
+        // Convertir l'objet Plat en un objet simple
+        const platObj = {
+            dateDebut: this.#dateDebut,
+            dateFin: this.#dateFin,
+            produit: this.#produit,
+            prix: this.#prix,
+            type: this.#type,
+            categorie: this.#categorie,
+            presencePorc: this.#presencePorc,
+            presenceAlcool: this.#presenceAlcool,
+            composants: this.#composants,
+            allergenes: this.#allergenes,
+            allergenesCroises: this.#allergenesCroises,
+            kcal: this.#kcal,
+            vegetarien: this.#vegetarien,
+            vegan: this.#vegan,
+            bio: this.#bio,
+            sansGluten: this.#sansGluten,
+            poids: this.#poids,
+            proteines: this.#proteines,
+            glucides: this.#glucides,
+            lipides: this.#lipides
+        };
+    
+        listLocaleStorage.push(platObj);
         localStorage.setItem("plat", JSON.stringify(listLocaleStorage));
     }
+    
 
     supprimerLocal() {
         let listLocaleStorage = localStorage.getItem("plat");
-        if (listLocaleStorage === null) {
-            listLocaleStorage = [];
-        } else {
+        if (listLocaleStorage !== null) {
             listLocaleStorage = JSON.parse(listLocaleStorage);
+    
+            // Filtrer la liste en supprimant l'objet qui a le même produit
+            listLocaleStorage = listLocaleStorage.filter(plat => plat.produit !== this.#produit);
+    
+            localStorage.setItem("plat", JSON.stringify(listLocaleStorage));
         }
-        listLocaleStorage = listLocaleStorage.filter(plat => plat !== this.#produit);
-        localStorage.setItem("plat", JSON.stringify(listLocaleStorage));
     }
 }

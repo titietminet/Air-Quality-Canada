@@ -20,7 +20,6 @@
             <div id="borderline-header" class="borderline-header" style="opacity: 0;"></div>
         </nav>
     </header>
-    <script type="module" src="js/main.js"></script>
     <section class="section-home">
         <div class="section-home-content">
             <img class="img-wagon-bar" src="img/wagon-bar.avif" alt="img_wagon_bar">
@@ -36,5 +35,12 @@
             <div id="search-box" class="search-box">
         </div>
     </section>
+    <section id="marked-section" class="marked-section">
+        
+    </section>
+    <script type="module">
+        import { Controller } from './js/controller.js';
+        new Controller();
+    </script>
 </body>
 </html>
