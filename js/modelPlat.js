@@ -19,8 +19,9 @@ export class Plat {
     #proteines;
     #glucides;
     #lipides;
+    #train;
 
-    constructor(dateDebut, dateFin, produit, prix, type, categorie, presencePorc, presenceAlcool, composants, allergenes, allergenesCroises, kcal, vegetarien, vegan, bio, sansGluten, poids, proteines, glucides, lipides) {
+    constructor(dateDebut, dateFin, produit, prix, type, categorie, presencePorc, presenceAlcool, composants, allergenes, allergenesCroises, kcal, vegetarien, vegan, bio, sansGluten, poids, proteines, glucides, lipides, train) {
         this.#dateDebut = dateDebut;
         this.#dateFin = dateFin;
         this.#produit = produit;
@@ -41,6 +42,7 @@ export class Plat {
         this.#proteines = proteines;
         this.#glucides = glucides;
         this.#lipides = lipides;
+        this.#train = train;
     }   
 
     get dateDebut() { return this.#dateDebut; }
@@ -103,6 +105,9 @@ export class Plat {
     get lipides() { return this.#lipides; }
     set lipides(value) { this.#lipides = value; }
 
+    get train() { return this.#train; }
+    set train(value) { this.#train = value; }
+
     engeristrerLocal() {
         let listLocaleStorage = localStorage.getItem("plat");
         if (listLocaleStorage === null) {
@@ -134,7 +139,8 @@ export class Plat {
             poids: this.#poids,
             proteines: this.#proteines,
             glucides: this.#glucides,
-            lipides: this.#lipides
+            lipides: this.#lipides,
+            train: this.#train
         };
     
         listLocaleStorage.push(platObj);
