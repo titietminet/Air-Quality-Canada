@@ -7,12 +7,22 @@ export class Controller {
         this.plats = [];
         this.platMarked = [];
         this.init();
+        this.repas = [];
     }
 
     init() {
         this.loadPlatsFromLocalStorage();
         this.fetchPlatsFromAPI();
         this.setupEventListeners();
+        this.repas = this.loadRepasFromLocalStorage();
+    }
+
+    loadRepasFromLocalStorage() {
+        let repasLocalStorage = localStorage.getItem("repas");
+        if (repasLocalStorage) {
+            return JSON.parse(repasLocalStorage).map(repas => new modelRepas(repas.nom, repas.plats));
+        }
+        return [];
     }
 
     loadPlatsFromLocalStorage() {
@@ -64,6 +74,7 @@ export class Controller {
 
     setupEventListeners() {
         view.searchInput.addEventListener("input", () => this.handleSearch());
+        view.searchBar.addEventListener("focusout", () => view.clearSearchBox());
         for (const el of view.headerLink) {
             el.addEventListener("mouseover", (e) => view.handleHeaderHover(e.target, true));
             el.addEventListener("mouseout", (e) => view.handleHeaderHover(e.target, false));
@@ -88,8 +99,16 @@ export class Controller {
         }
     }
 
+    removePlatToMarked(produit) {
+        const plat = this.plats.find(p => p.produit === produit);
+        if (plat && !this.platMarked.includes(plat)) {
+            plat.supprimerLocal();
+            this.platMarked = this.platMarked.filter(p => p.produit !== produit);
+            this.updateMarkedSection();
+        }
+    }
+
     updateMarkedSection() {
-        view.clearMarkedSection();
-        this.platMarked.forEach(plat => view.addMarkedPlat(plat));
+        view.addMarkedPlat(this.platMarked, (produit) => this.removePlatToMarked(produit));
     }
 }

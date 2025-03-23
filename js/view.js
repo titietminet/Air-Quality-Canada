@@ -12,8 +12,12 @@ export const view = {
 
     btnProduits : document.getElementsByClassName("search-btn"),
 
-    markekSection : document.getElementById("marked-section"),
+    markekSectionTgv : document.getElementById("tgv-marked"),
 
+    markekSectionIntecrite : document.getElementById("intercite-marked"),
+
+    btnRemovePlat : document.getElementsByClassName("remove-btn"),
+    
     clearSearchBox() {
         this.searchBox.innerHTML = "";
         this.searchBox.style.opacity = `0`;
@@ -45,20 +49,25 @@ export const view = {
                     <div class="search-left-plat">
                         ${html}
                         <p>${plat.prix}€</p>
+                        <select class="choice-repas" name="choice-repas" id="pet-select">
+                            <option value="">ajouter a un repas</option>
+                        </select>
                         <button id="btn-${plat.produit}" class="search-btn">
                             <img src="img/add-favorite-marked-svgrepo-com.svg"/>
                         </button>
                     </div>
                 </div>
             `;
-        }else{
-            
+        }else{ 
         return `
             <div class="search-plat">
                 <p>${plat.produit}</p>
                 <div class="search-left-plat">
                     ${html}
                     <p>${plat.prix}€</p>
+                        <select class="choice-repas" name="choice-repas" id="pet-select">
+                            <option value="">ajouter a un repas</option>
+                        </select>
                     <button style="background-color: #8de8fe;" id="btn-${plat.produit}" class="search-btn">
                         <img src="img/add-favorite-marked-svgrepo-com.svg"/>
                     </button>
@@ -66,6 +75,39 @@ export const view = {
             </div>
         `;
         }
+    },
+
+    generateHtmlForPlatMarkedSection(plat) {
+        let html = "";
+        if (plat.vegetarien === "OUI") {
+            html += '<img class="img-food-search" src="img/food-no-meat-svgrepo-com.svg" alt="no-meat"/>';
+        }
+        if (plat.vegan === "OUI") {
+            html += '<img class="img-food-search" src="img/vegan-svgrepo-com.svg" alt="vegan"/>';
+        }
+        if (plat.presencePorc === "OUI") {
+            html += '<img class="img-food-search" src="img/pig-illustration-svgrepo-com.svg" alt="porc"/>';
+        }
+        if (plat.train === "TGV") {
+            html += '<img style="height: 0.7rem; width: auto;" class="img-food-search" src="img/TGV.svg" alt="tgv"/>';
+        } else {
+            html += '<img style="height: auto; width: 2.7rem;" class="img-food-search" src="img/intercite.svg" alt="intercite"/>';
+        }
+        return `
+            <div style="width: 90%;" class="search-plat">
+                <p>${plat.produit}</p>
+                <div class="search-left-plat">
+                    ${html}
+                    <p>${plat.prix}€</p>
+                        <select class="choice-repas" name="choice-repas" id="pet-select">
+                            <option value="">ajouter a un repas</option>
+                        </select>
+                    <button style="background-color: #8de8fe;" id="btn-${plat.produit}" class="remove-btn">
+                        <img src="img/add-favorite-marked-svgrepo-com.svg"/>
+                    </button>
+                </div>
+            </div>
+        `;
     },
 
     displaySearchResults(plats, onAddCallback, isMarked) {
@@ -97,12 +139,32 @@ export const view = {
     },
 
     clearMarkedSection() {
-        this.markekSection.innerHTML = "";
+        Array.from(this.markekSectionTgv.children).forEach(child => {
+            if (child.tagName !== "H1") {
+            child.remove();
+            }
+        });
+        Array.from(this.markekSectionIntecrite.children).forEach(child => {
+            if (child.tagName !== "H1") {
+            child.remove();
+            }
+        });
     },
 
-    addMarkedPlat(plat) {
-        const html = this.generateHtmlForPlat(plat);
-        this.markekSection.innerHTML += html;
+    addMarkedPlat(plats, onRemoveCallback) {
+        this.clearMarkedSection();
+        plats.forEach(plat => {
+            if (plat.train === "TGV") {
+                const html = this.generateHtmlForPlatMarkedSection(plat);
+                this.markekSectionTgv.innerHTML += html;
+            } else {
+                const html = this.generateHtmlForPlatMarkedSection(plat);
+                this.markekSectionIntecrite.innerHTML += html;
+            }
+        });
+        Array.from(this.btnRemovePlat).forEach(btn => {
+            btn.addEventListener("click", () => onRemoveCallback(btn.id.split("-")[1]));
+        });
     },
 
     handleHeaderHover(element, isHovering) {
