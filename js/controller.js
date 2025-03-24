@@ -74,7 +74,11 @@ export class Controller {
 
     setupEventListeners() {
         view.searchInput.addEventListener("input", () => this.handleSearch());
-        view.searchBar.addEventListener("focusout", () => view.clearSearchBox());
+        view.searchInput.addEventListener("focusout", () => {
+            view.searchBox.addEventListener("mouseout", () => {
+            view.clearSearchBox();
+            }, { once: true });
+        });
         for (const el of view.headerLink) {
             el.addEventListener("mouseover", (e) => view.handleHeaderHover(e.target, true));
             el.addEventListener("mouseout", (e) => view.handleHeaderHover(e.target, false));
@@ -92,7 +96,7 @@ export class Controller {
 
     addPlatToMarked(produit) {
         const plat = this.plats.find(p => p.produit === produit);
-        if (plat && !this.platMarked.includes(plat)) {
+        if (plat && !this.platMarked.includes(plat => plat.produit.toLowerCase().includes(produit))) {
             plat.engeristrerLocal();
             this.platMarked.push(plat);
             this.updateMarkedSection();
@@ -101,7 +105,7 @@ export class Controller {
 
     removePlatToMarked(produit) {
         const plat = this.plats.find(p => p.produit === produit);
-        if (plat && !this.platMarked.includes(plat)) {
+        if (plat) {
             plat.supprimerLocal();
             this.platMarked = this.platMarked.filter(p => p.produit !== produit);
             this.updateMarkedSection();
