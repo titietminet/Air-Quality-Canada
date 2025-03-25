@@ -14,13 +14,11 @@
         <nav>
             <ul>
                 <li><a class="header-link here" href="">Recherche</a></li>
-                <li><a class="header-link" href="">Repas</a></li>
-                <li><a class="header-link" href="">Compte</a></li>
+                <li><a class="header-link" href="repas.html">Repas</a></li>
             </ul>
             <div id="borderline-header" class="borderline-header" style="opacity: 0;"></div>
         </nav>
     </header>
-    <script type="module" src="js/main.js"></script>
     <section class="section-home">
         <div class="section-home-content">
             <img class="img-wagon-bar" src="img/wagon-bar.avif" alt="img_wagon_bar">
@@ -35,6 +33,19 @@
         </div>
             <div id="search-box" class="search-box">
         </div>
+        <img src="img/arrow-down-338-svgrepo-com.svg" alt="arrow_down" class="arrow-down">
     </section>
+    <section id="marked-section" class="marked-section">
+        <div id="tgv-marked" class="marked-section-content">
+            <h1>Dans vos TGV préférés</h1>
+        </div>
+        <div id="intercite-marked" class="marked-section-content">
+            <h1>Dans vos INTERCITE préférés</h1>
+        </div>
+    </section>
+    <script type="module">
+        import { Controller } from './js/controller.js';
+        new Controller();
+    </script>
 </body>
 </html>
