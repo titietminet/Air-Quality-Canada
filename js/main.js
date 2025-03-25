@@ -1,11 +1,13 @@
 import { view } from "./view.js";
 import { Plat } from "./modelPlat.js";
+import { modelRepas } from "./modelRepas.js";
 
 console.log("main.js");
 
 const listLocaleStorage = localStorage.getItem("like");
 
 const plats = [];
+
 
 fetch('https://data.sncf.com/api/explore/v2.1/catalog/datasets/menus-des-bars-tgv/records?limit=100',{
     method: 'GET',

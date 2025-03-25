@@ -1,21 +1,21 @@
 export class modelRepas {
     constructor(nom) {
-        this.nom = nom;
-        this.plats = [];
+        this._nom = nom;
+        this._plats = [];
     }
 
     addPlat(plat) {
         this.plats.push(plat);
-        this.saveToLocalStorage();
+        this.enregistrerLocal();
     }
 
     removePlat(plat) {
         this.plats = this.plats.filter(p => p !== plat);
-        this.saveToLocalStorage();
+        this.enregistrerLocal();
     }
 
     get plats() {
-        return this.plats;
+        return this._plats;
     }
 
     getlat(nom) {
@@ -23,7 +23,7 @@ export class modelRepas {
     }
 
     get nom() {
-        return this.nom;
+        return this._nom;
     }
 
     getPrix() {
@@ -69,7 +69,7 @@ export class modelRepas {
     isPresenceAlcool() {
         presenceAlcool = false;
         for (const plat of this.plats) {
-            if (plat.presenceAlcool == "OUI") {
+            if (plat.presenceAlcool === "OUI") {
                 presenceAlcool = true;
             }
         }
@@ -79,7 +79,7 @@ export class modelRepas {
     isVegetarien() {
         vegetarien = true;
         for (const plat of this.plats) {
-            if (plat.vegetarien == "NON") {
+            if (plat.vegetarien === "NON") {
                 vegetarien = false;
             }
         }
@@ -89,7 +89,7 @@ export class modelRepas {
     isVegan() {
         vegan = false;
         for (const plat of this.plats) {
-            if (plat.vegan == "OUI") {
+            if (plat.vegan === "OUI") {
                 vegan = true;
             }
         }
@@ -99,7 +99,7 @@ export class modelRepas {
     isBio() {
         bio = true;
         for (const plat of this.plats) {
-            if (plat.bio == "NON") {
+            if (plat.bio === "NON") {
                 bio = false;
             }
         }
@@ -109,7 +109,7 @@ export class modelRepas {
     isSansGluten() {
         sansGluten = true;
         for (const plat of this.plats) {
-            if (plat.sansGluten == "NON") {
+            if (plat.sansGluten === "NON") {
                 sansGluten = false;
             }
         }
@@ -138,17 +138,21 @@ export class modelRepas {
         return allergenes;
     }
 
-    static getAllRepas() {
-        const repasData = localStorage.getItem('repasCollection');
-        return repasData ? JSON.parse(repasData) : {};
+
+    enregistrerLocal() {
+        let listLocalStorage = localStorage.getItem("repas");
+        if (listLocalStorage === null) {
+            listLocalStorage = [];
+        } else {
+            listLocalStorage = JSON.parse(listLocalStorage);
+        }
+
+        listLocalStorage[this.nom] = this;
+
+        localStorage.setItem('repas', JSON.stringify(listLocalStorage));
     }
 
-    static saveToLocalStorage() {
-        const repas = modelRepas.getAllRepas();
-        repas[this.nom] = this;
-        localStorage.setItem('repasCollection', JSON.stringify(repas));
-    }
-
+    /*
     static loadFromLocalStorage(nom) {
         const repasCollection = modelRepas.getAllRepas();
         if (!repasCollection[nom]) return null;
@@ -158,10 +162,69 @@ export class modelRepas {
         repas.plats = obj.plats;
         return repas;
     }
+        */
 
-    static removeRepas(nom) {
-        const repasCollection = modelRepas.getAllRepas();
-        delete repasCollection[nom];
-        localStorage.setItem('repasCollection', JSON.stringify(repasCollection));
+    supprimerLocal() {
+        let listLocaleStorage = localStorage.getItem("repas");
+        if(listLocaleStorage === null) {
+            listLocaleStorage = [];
+        }
+        else {
+            listLocaleStorage = JSON.parse(listLocaleStorage);
+        }
+        listLocaleStorage = listLocaleStorage.filter(p => p !== this.nom);
+        localStorage.setItem('repas', JSON.stringify(listLocaleStorage));
     }
+
+    getHtmlRepas() {
+        let html = "";
+        html += '<div class="repas-box">';
+        html += '<h1 class="repas-title">Repas ' + this.nom + '</h1>';
+        
+        // Liste des plats
+        html += '<div class="plats">';
+        for (const plat of this.plats) {
+            html += '<p>' + plat.produit + ' - ' + plat.prix + '€</p>';
+        }
+        html += '</div>';
+    
+        // Icônes
+        html += '<div class="repas-icons">';
+        if (this.isVegetarien()) {
+            html += '<img class="img-food-search" src="img/food-no-meat-svgrepo-com.svg" alt="no-meat"/>';
+        }
+        if (this.isVegan()) {
+            html += '<img class="img-food-search" src="img/vegan-svgrepo-com.svg" alt="vegan"/>';
+        }
+        if (this.isPresencePorc()) {
+            html += '<img class="img-food-search" src="img/pig-illustration-svgrepo-com.svg" alt="porc"/>';
+        }
+        html += '</div>';
+    
+        // Infos nutritionnelles en ligne
+        html += '<div class="nutrition-info">';
+        html += '<p>Glucides : ' + this.getGlucides() + 'g</p>';
+        html += '<p>Protéines : ' + this.getProteines() + 'g</p>';
+        html += '<p>Lipides : ' + this.getLipides() + 'g</p>';
+        html += '<p>Kcal : ' + this.getKcal() + '</p>';
+        html += '</div>';
+    
+        // Allergènes sous forme de box grises
+        const allergenes = this.getAllergenes();
+        if (allergenes.length > 0) {
+            html += '<div class="allergenes-container">';
+            for (const allergene of allergenes) {
+                html += '<span class="allergene-box">' + allergene + '</span>';
+            }
+            html += '</div>';
+        }
+    
+        // Prix à droite en gras
+        html += '<p class="prix">Prix : ' + this.getPrix() + '€</p>';
+        
+        html += '</div>';
+        
+        return html;
+    }
+    
 }
