@@ -36,7 +36,7 @@ export class modelRepas {
         for (const plat of this.#plats) {
             prix += plat.prix;
         }
-        return prix;
+        return prix.toFixed(2);
     }
 
     getKcal() {
@@ -44,7 +44,7 @@ export class modelRepas {
         for (const plat of this.#plats) {
             kcal += plat.kcal;
         }
-        return kcal;
+        return kcal.toFixed(2);
     }
 
     getProteines() {
@@ -52,7 +52,7 @@ export class modelRepas {
         for (const plat of this.#plats) {
             proteines += plat.proteines;
         }
-        return proteines;
+        return proteines.toFixed(2);
     }
 
     getGlucides() {
@@ -60,7 +60,7 @@ export class modelRepas {
         for (const plat of this.#plats) {
             glucides += plat.glucides;
         }
-        return glucides;
+        return glucides.toFixed(2); 
     }
 
     getLipides() {
@@ -68,7 +68,7 @@ export class modelRepas {
         for (const plat of this.#plats) {
             lipides += plat.lipides;
         }
-        return lipides;
+        return lipides.toFixed(2);
     }
 
     isPresenceAlcool() {
@@ -92,10 +92,10 @@ export class modelRepas {
     }
 
     isVegan() {
-        let vegan = false;
+        let vegan = true;
         for (const plat of this.#plats) {
-            if (plat.vegan === "OUI") {
-                vegan = true;
+            if (plat.vegan === "NON") {
+                vegan = false;
             }
         }
         return vegan;

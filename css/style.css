@@ -322,7 +322,6 @@ align-self: flex-start;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #0C121E;
   gap: 1.5rem;
   width: 80%;
   margin: 2rem auto;
@@ -348,13 +347,13 @@ align-self: flex-start;
 
 /* Liste des plats */
 .plats {
-  padding-left: 1rem;
+  padding-left: 2rem;
   margin-bottom: 1rem;
 }
 
 .plats p {
   font-size: 1rem;
-  margin: 0.3rem 0;
+  margin: 0.5rem 0;
 }
 
 /* Alignement des icônes */
@@ -398,4 +397,21 @@ align-self: flex-start;
   font-weight: bold;
   text-align: right;
   font-size: 1.2rem;
+}
+
+.plat-item {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:100%;
+}
+
+.plat-nom{
+  text-align:left;
+}
+
+.plat-prix{
+  font-weight:bold;
+  text-align:right;
+  min-width:50px;
 }

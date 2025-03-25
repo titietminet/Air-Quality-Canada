@@ -13,7 +13,10 @@ export const view = {
             // Liste des plats
             html += '<div class="plats">';
             for (const plat of repas.plats) {
-                html += '<p>' + plat.produit + ' - ' + plat.prix + '€</p>';
+                html += '<div class="plat-item">';
+                html += '<p class="plat-nom">' + plat.produit +'</p>';
+                html += '<p class="plat-prix">' + plat.prix +  ' €</p>';
+                html += '</div>';
             }
             html += '</div>';
         
@@ -49,7 +52,7 @@ export const view = {
             }
         
             // Prix à droite en gras
-            html += '<p class="prix">Prix : ' + repas.getPrix() + '€</p>';
+            html += '<p class="prix">Prix : ' + repas.getPrix() + ' €</p>';
             
             html += '</div>';
         });
