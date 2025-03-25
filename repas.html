@@ -19,9 +19,12 @@
             <div id="borderline-header" class="borderline-header" style="opacity: 0;"></div>
         </nav>
     </header>
-    <script type="module" src="js/main.js"></script>
     <section class="repas-container" id="repas-container">
         <!-- Les repas seront insérés ici dynamiquement -->
     </section>
+    <script type="module">
+        import { Controller } from './js/controlleurRepas.js';
+        new Controller();
+    </script>
 </body>
 </html>

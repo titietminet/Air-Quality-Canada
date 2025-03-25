@@ -53,10 +53,10 @@ export class Controller {
         .then(([tgvData, interciteData]) => {
             const tgvPlats = tgvData.results.map(element => new Plat(
                 element.date_debut, element.date_fin, element.produit, element.prix_au_produit, 
-                element.type, element.categorie, element.presence_de_porc, element.presence_alcool, 
-                element.composants, element.allergenes, element.allergenes_croises, 
-                element.kcal, element.recette_vegetarienne, element.recette_vegane, element.bio, 
-                element.sans_gluten, element.poids, element.proteines, element.glucides, element.lipides, "TGV"
+                element.type, element.categorie_produit, element.presence_de_porc, element.presence_d_alcool, 
+                element.composants, element.allergenes, element.allergenes_susceptibles_de_provenir_de_contaminations_croisees, 
+                element.kcal_pour_100_ml_ou_100g, element.recette_vegetarienne, element.recette_vegane, element.bio, 
+                element.sans_gluten, element.poids_cl_g, element.proteines_100g_100ml, element.glucides_100g_100ml, element.lipides_100g_100ml, "TGV"
             ));
 
             const intercitePlats = interciteData.results.map(element => new Plat(
