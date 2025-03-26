@@ -1,6 +1,6 @@
-import { view } from "./view.js";
-import { Plat } from "./modelPlat.js";
-import { modelRepas } from "./modelRepas.js";
+import { view } from "../view/view.js";
+import { Plat } from "../model/modelPlat.js";
+import { modelRepas } from "../model/modelRepas.js";
 
 export class Controller {
     constructor() {
