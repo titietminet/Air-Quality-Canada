@@ -6,9 +6,8 @@ export const view = {
         this.sectionRepas.innerHTML = "";
         let html = "";
         lRepas.forEach(repas => {
-            console.log(repas);
             html += '<div class="repas-box">';
-            html += '<h1 class="repas-title">Repas ' + repas.nom + '</h1>';
+            html += '<h1 class="repas-title">' + repas.nom + '</h1>';
             
             // Liste des plats
             html += '<div class="plats">';
