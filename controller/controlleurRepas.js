@@ -2,7 +2,7 @@ import { modelRepas } from "../model/modelRepas.js";
 import { view } from "../view/viewRepas.js";
 import { Plat } from "../model/modelPlat.js";
 
-export class Controller {
+export class ControllerRepas {
     constructor() {
         this.repas = [];
         this.plats = [];
