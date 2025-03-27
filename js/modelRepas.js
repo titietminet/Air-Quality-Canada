@@ -132,20 +132,21 @@ export class modelRepas {
     }
     
     getAllergenes() {
-        let allergenes = [];
+        let allergenes = new Set(); //set pour éviter les doublons
+    
         for (const plat of this.#plats) {
-            if (plat.allergenes === null) {
-                return [];
-            }
-            for (const allergene of plat.allergenes) {
-                if (!allergene.includes(allergene)) {
-                    allergene.push(allergene);
+            if (plat.allergenes && plat.allergenes.trim() !== "") { 
+                let listeAllergenes = plat.allergenes.split(",").map(a => a.trim()); 
+    
+                for (const allergene of listeAllergenes) {
+                    allergenes.add(allergene.toLowerCase()); 
                 }
             }
         }
-        return allergenes;
+    
+        return Array.from(allergenes); //conversion en array
     }
-
+    
 
     enregistrerLocal() {
         let listLocalStorage = localStorage.getItem("repas");
