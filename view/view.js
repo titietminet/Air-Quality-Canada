@@ -58,12 +58,12 @@ export const view = {
                     <div class="search-left-plat">
                         ${html}
                         <p>${plat.prix}€</p>
-                        <select class="choice-repas" name="choice-repas" id="select-${plat.produit}">
+                        <select class="choice-repas" name="choice-repas" id="select_${plat.produit}">
                             <option value="none">choisir un repas</option>
                             ${htmlRepas}
                             <option value="new">nouveau repas</option>
                         </select>
-                        <button id="btn-${plat.produit}" class="search-btn">
+                        <button id="btn_${plat.produit}" class="search-btn">
                             <img src="img/add-favorite-marked-svgrepo-com.svg"/>
                         </button>
                     </div>
@@ -76,12 +76,12 @@ export const view = {
                 <div class="search-left-plat">
                     ${html}
                     <p>${plat.prix}€</p>
-                        <select class="choice-repas" name="choice-repas" id="select-${plat.produit}">
+                        <select class="choice-repas" name="choice-repas" id="select_${plat.produit}">
                             <option value="none">choisir un repas</option>
                             ${htmlRepas}
                             <option value="new">nouveau repas</option>
                         </select>
-                    <button style="background-color: #8de8fe;" id="btn-${plat.produit}" class="search-btn">
+                    <button style="background-color: #8de8fe;" id="btn_${plat.produit}" class="search-btn">
                         <img src="img/add-favorite-marked-svgrepo-com.svg"/>
                     </button>
                 </div>
@@ -119,12 +119,12 @@ export const view = {
                 <div class="search-left-plat">
                     ${html}
                     <p>${plat.prix}€</p>
-                        <select class="choice-repas" name="choice-repas" id="select-${plat.produit}">
+                        <select class="choice-repas" name="choice-repas" id="select_${plat.produit}">
                             <option value="none">choisir un repas</option>
                             ${htmlRepas}
                             <option value="new">nouveau repas</option>
                         </select>
-                    <button style="background-color: #8de8fe;" id="btn-${plat.produit}" class="remove-btn">
+                    <button style="background-color: #8de8fe;" id="btn_${plat.produit}" class="remove-btn">
                         <img src="img/add-favorite-marked-svgrepo-com.svg"/>
                     </button>
                 </div>

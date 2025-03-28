@@ -86,7 +86,7 @@ export class Controller {
         }
         for (const el of view.choiceRepas){
             el.addEventListener("change", (e) => {
-                const parentId = e.target.closest("[id]").id.split('-')[1];
+                const parentId = e.target.closest("[id]").id.split('_')[1];
                 this.addPlatToRepas(e.target.value, parentId);
             });
         }
@@ -101,7 +101,7 @@ export class Controller {
         }
         for (const el of view.choiceRepas){
             el.addEventListener("change", (e) => {
-                const parentId = e.target.closest("[id]").id.split('-')[1];
+                const parentId = e.target.closest("[id]").id.split('_')[1];
                 this.addPlatToRepas(e.target.value, parentId);
             });
         }
