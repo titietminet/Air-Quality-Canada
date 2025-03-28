@@ -189,7 +189,7 @@ export const view = {
             }
         });
         Array.from(this.btnRemovePlat).forEach(btn => {
-            btn.addEventListener("click", () => onRemoveCallback(btn.id.split("-")[1]));
+            btn.addEventListener("click", () => onRemoveCallback(btn.id.split("_")[1]));
         });
     },
 
