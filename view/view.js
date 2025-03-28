@@ -161,16 +161,20 @@ export const view = {
     },
 
     clearMarkedSection() {
-        Array.from(this.markekSectionTgv.children).forEach(child => {
-            if (child.tagName !== "H1") {
-            child.remove();
-            }
-        });
-        Array.from(this.markekSectionIntecrite.children).forEach(child => {
-            if (child.tagName !== "H1") {
-            child.remove();
-            }
-        });
+        if (this.markekSectionTgv) {
+            Array.from(this.markekSectionTgv.children).forEach(child => {
+                if (child.tagName !== "H1") {
+                    child.remove();
+                }
+            });
+        }
+        if (this.markekSectionIntecrite) {
+            Array.from(this.markekSectionIntecrite.children).forEach(child => {
+                if (child.tagName !== "H1") {
+                    child.remove();
+                }
+            });
+        }
     },
 
     addMarkedPlat(plats, onRemoveCallback, repas) {
