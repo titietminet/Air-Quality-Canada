@@ -142,30 +142,18 @@ export class modelRepas {
         let allergenes = new Set(); //set pour éviter les doublons
     
         for (const plat of this.#plats) {
-<<<<<<< HEAD:js/modelRepas.js
             if (plat.allergenes && plat.allergenes.trim() !== "") { 
                 let listeAllergenes = plat.allergenes.split(",").map(a => a.trim()); 
     
                 for (const allergene of listeAllergenes) {
                     allergenes.add(allergene.toLowerCase()); 
-=======
-            if (typeof plat.allergenes === "undefined" || plat.allergenes === null) {
-                return [];
-            }
-            for (const allergene of plat.allergenes) {
-                if (!allergene.includes(allergene)) {
-                    allergene.push(allergene);
->>>>>>> refs/remotes/origin/main:model/modelRepas.js
                 }
             }
         }
     
         return Array.from(allergenes); //conversion en array
     }
-<<<<<<< HEAD:js/modelRepas.js
     
-=======
->>>>>>> refs/remotes/origin/main:model/modelRepas.js
 
     enregistrerLocal() {
         let listLocalStorage = localStorage.getItem("repas");
