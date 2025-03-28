@@ -156,7 +156,7 @@ export const view = {
             this.searchBox.innerHTML += html;
         });
         Array.from(this.btnProduits).forEach(btn => {
-            btn.addEventListener("click", () => onAddCallback(btn.id.split("-")[1]));
+            btn.addEventListener("click", () => onAddCallback(btn.id.split("_")[1]));
         });
     },
 
