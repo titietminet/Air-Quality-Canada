@@ -1,5 +1,7 @@
-export class modelRepas {
+import { Plat } from "./modelPlat.js"; // Ajout de l'importation de Plat
 
+export class modelRepas {
+    
     #nom;
 
     #plats;
@@ -10,6 +12,10 @@ export class modelRepas {
     }
 
     addPlat(plat) {
+        
+        if (this.#plats.find(p=> p.produit === plat.produit)) {
+            return;
+        }
         this.#plats.push(plat);
         this.enregistrerLocal();
     }
@@ -84,6 +90,7 @@ export class modelRepas {
     isVegetarien() {
         let vegetarien = true;
         for (const plat of this.#plats) {
+            console.log(plat);
             if (plat.vegetarien === "NON") {
                 vegetarien = false;
             }
@@ -124,7 +131,7 @@ export class modelRepas {
     isPresencePorc() {
         let presencePorc = false;
         for (const plat of this.#plats) {
-            if (plat.presencePorc) {
+            if (plat.presencePorc === "OUI") {
                 presencePorc = true;
             }
         }
@@ -135,18 +142,30 @@ export class modelRepas {
         let allergenes = new Set(); //set pour éviter les doublons
     
         for (const plat of this.#plats) {
+<<<<<<< HEAD:js/modelRepas.js
             if (plat.allergenes && plat.allergenes.trim() !== "") { 
                 let listeAllergenes = plat.allergenes.split(",").map(a => a.trim()); 
     
                 for (const allergene of listeAllergenes) {
                     allergenes.add(allergene.toLowerCase()); 
+=======
+            if (typeof plat.allergenes === "undefined" || plat.allergenes === null) {
+                return [];
+            }
+            for (const allergene of plat.allergenes) {
+                if (!allergene.includes(allergene)) {
+                    allergene.push(allergene);
+>>>>>>> refs/remotes/origin/main:model/modelRepas.js
                 }
             }
         }
     
         return Array.from(allergenes); //conversion en array
     }
+<<<<<<< HEAD:js/modelRepas.js
     
+=======
+>>>>>>> refs/remotes/origin/main:model/modelRepas.js
 
     enregistrerLocal() {
         let listLocalStorage = localStorage.getItem("repas");
@@ -156,22 +175,19 @@ export class modelRepas {
             listLocalStorage = JSON.parse(listLocalStorage);
         }
 
-        listLocalStorage[this.#nom] = this;
+        // Rechercher si le repas existe déjà
+        const index = listLocalStorage.findIndex(repas => repas.nom === this.#nom);
+        if (index !== -1) {
+            // Mettre à jour l'élément existant
+            listLocalStorage[index] = this.toJSON();
+        } else {
+            // Ajouter un nouvel élément
+            listLocalStorage.push(this.toJSON());
+        }
 
+        // Mettre à jour le localStorage
         localStorage.setItem('repas', JSON.stringify(listLocalStorage));
     }
-
-    /*
-    static loadFromLocalStorage(nom) {
-        const repasCollection = modelRepas.getAllRepas();
-        if (!repasCollection[nom]) return null;
-
-        const obj = repasCollection[nom];
-        const repas = new modelRepas(obj.nom);
-        repas.plats = obj.plats;
-        return repas;
-    }
-        */
 
     supprimerLocal() {
         let listLocaleStorage = localStorage.getItem("repas");
@@ -185,6 +201,17 @@ export class modelRepas {
         localStorage.setItem('repas', JSON.stringify(listLocaleStorage));
     }
 
+    // Méthode pour sérialiser l'objet
+    toJSON() {
+        return {
+            nom: this.#nom,
+            plats: this.#plats.map(plat => plat.toJSON())
+        };
+    }
 
+    // Méthode pour recréer un objet à partir de JSON
+    static fromJSON(data) {
+        return new modelRepas(data.nom, data.plats.map(Plat.fromJSON)); // Correction : Plat est maintenant défini
+    }
     
 }

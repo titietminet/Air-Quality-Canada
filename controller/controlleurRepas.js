@@ -1,8 +1,8 @@
-import { modelRepas } from "./modelRepas.js";
-import { view } from "./viewRepas.js";
-import { Plat } from "./modelPlat.js";
+import { modelRepas } from "../model/modelRepas.js";
+import { view } from "../view/viewRepas.js";
+import { Plat } from "../model/modelPlat.js";
 
-export class Controller {
+export class ControllerRepas {
     constructor() {
         this.repas = [];
         this.plats = [];
@@ -41,7 +41,6 @@ export class Controller {
             ));
 
             this.plats = [...tgvPlats, ...intercitePlats];
-            this.repas.push(new modelRepas("Repas 1", this.plats));
             view.getHtmlRepas(this.repas);
         });
     }
@@ -50,7 +49,7 @@ export class Controller {
     loadRepasFromLocalStorage() {
         let repasLocalStorage = localStorage.getItem("repas");
         if (repasLocalStorage) {
-            return JSON.parse(repasLocalStorage).map(repas => new modelRepas(repas.nom, repas.plats));
+            return JSON.parse(repasLocalStorage).map(repasData => modelRepas.fromJSON(repasData));
         }
         return [];
     }

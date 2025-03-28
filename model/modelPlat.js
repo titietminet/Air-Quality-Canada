@@ -108,6 +108,43 @@ export class Plat {
     get train() { return this.#train; }
     set train(value) { this.#train = value; }
 
+    // Correctly implement the toJSON method
+    toJSON() {
+        return {
+            dateDebut: this.#dateDebut,
+            dateFin: this.#dateFin,
+            produit: this.#produit,
+            prix: this.#prix,
+            type: this.#type,
+            categorie: this.#categorie,
+            presencePorc: this.#presencePorc,
+            presenceAlcool: this.#presenceAlcool,
+            composants: this.#composants,
+            allergenes: this.#allergenes,
+            allergenesCroises: this.#allergenesCroises,
+            kcal: this.#kcal,
+            vegetarien: this.#vegetarien,
+            vegan: this.#vegan,
+            bio: this.#bio,
+            sansGluten: this.#sansGluten,
+            poids: this.#poids,
+            proteines: this.#proteines,
+            glucides: this.#glucides,
+            lipides: this.#lipides,
+            train: this.#train
+        };
+    }
+
+    // Méthode pour recréer un objet à partir de JSON
+    static fromJSON(data) {
+        return new Plat(
+            data.dateDebut, data.dateFin, data.produit, data.prix, data.type, data.categorie,
+            data.presencePorc, data.presenceAlcool, data.composants, data.allergenes,
+            data.allergenesCroises, data.kcal, data.vegetarien, data.vegan, data.bio,
+            data.sansGluten, data.poids, data.proteines, data.glucides, data.lipides, data.train
+        );
+    }
+
     engeristrerLocal() {
         let listLocaleStorage = localStorage.getItem("plat");
         if (listLocaleStorage === null) {
